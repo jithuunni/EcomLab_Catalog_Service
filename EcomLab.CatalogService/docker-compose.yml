@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  ecomlab.catalogservice.api:
+    image: ${DOCKER_REGISTRY-}ecomlabcatalogserviceapi
+    build:
+      context: .
+      dockerfile: EcomLab.CatalogService.Api/Dockerfile
+
+  catalogservice.db:
+    image: mongo

@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  ecomlab.catalogservice.api:
+    container_name: catalogservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:CatalogDbConnection=mongodb://catalogservicedb:27017"
+      - "DatabaseName=CatalogDb"
+      - "CollectionNames:Product=Products"
+    depends_on:
+      - catalogservice.db
+    ports:
+      - "5000:80" 
+
+  catalogservice.db:
+    container_name: catalogservicedb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site:/data/db 
